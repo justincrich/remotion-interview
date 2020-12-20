@@ -5,12 +5,15 @@ import * as serviceWorker from './serviceWorker'
 import { ThemeProvider } from './styles/ThemeProvider'
 import { theme } from './styles/theme'
 import { reset } from './styles/reset'
+import { ChatScreen } from './containers/ChatScreen'
 
 const GlobalStyle = createGlobalStyle`
   #root{
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex: 1 1 auto;
   }
 
   ${reset}
@@ -21,7 +24,7 @@ ReactDOM.render(
         <ThemeProvider theme={theme}>
             <>
                 <GlobalStyle />
-                <div>hi</div>
+                <ChatScreen />
             </>
         </ThemeProvider>
     </React.StrictMode>,
