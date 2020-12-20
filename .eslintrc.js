@@ -24,6 +24,7 @@ module.exports = {
     
     // NOTE: conflicts with prettier
     "@typescript-eslint/indent": "off",
+    "react/require-default-props": 0,
     "react/jsx-indent-props": 0,
     "@typescript-eslint/ban-ts-ignore": "off",
     "react/jsx-props-no-spreading": 0,

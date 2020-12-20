@@ -167,10 +167,10 @@ const Content = styled.div<Input & { focused: boolean }>`
                 ${p.hasError ? color.status.error : color.border.primary};
             border-radius: 5px;
         `}
-    &:hover ${PencilIcon}{
-       ${(p) =>
-           !p.disabled &&
-           `
+    &:hover ${PencilIcon} {
+        ${(p) =>
+            !p.disabled &&
+            `
          display: flex;
        `}
     }
