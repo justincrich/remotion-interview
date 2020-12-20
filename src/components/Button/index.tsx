@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { color } from '../../styles/color'
 import { mixins } from '../../styles/mixins/index'
 import { button } from '../../styles/mixins/button'

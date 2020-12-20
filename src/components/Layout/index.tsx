@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useAuthCheck } from '../../hooks/useAuthCheck'

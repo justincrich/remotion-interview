@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components/macro'
 import * as serviceWorker from './serviceWorker'
 import { store } from './services'
 import { ThemeProvider } from './styles/ThemeProvider'

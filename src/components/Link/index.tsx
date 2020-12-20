@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link as RRLink } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 import { mixins } from '../../styles/mixins'
 import { color } from '../../styles/color'
 import { Icon as RawIcon, IconsProps } from '../Icon/index'

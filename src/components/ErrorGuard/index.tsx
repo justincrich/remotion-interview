@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { color } from '../../styles/color'
 
 export class ErrorGuard extends React.Component<

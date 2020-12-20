@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 import { DbStatus } from '../../clients/schemas/project'
 import { mixins } from '../../styles/mixins'
 import { color } from '../../styles/color'

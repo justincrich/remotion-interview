@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Spinner from 'react-spinkit'
 import { color } from '../../styles/color'
 import { mixins } from '../../styles/mixins/index'

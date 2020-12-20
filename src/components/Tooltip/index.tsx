@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Tippy from '@tippyjs/react'
 import { mixins } from '../../styles/mixins'
 import { color } from '../../styles/color'

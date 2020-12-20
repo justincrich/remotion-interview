@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useSpring, animated, useChain } from 'react-spring'
 import { Icon } from '../Icon/index'
 import { mixins } from '../../styles/mixins'
