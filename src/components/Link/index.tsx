@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/macro'
 import { mixins } from '../../styles/mixins'
 import { color } from '../../styles/color'
 import { Icon as RawIcon, IconsProps } from '../Icon/index'
-import { spacing } from '../../styles/mixins/constants'
+import { SPACING_PX } from '../../styles/mixins/constants'
 
 interface LinkProps {
     children: string
@@ -38,7 +38,7 @@ const Component = styled.a`
 const Icon = styled(RawIcon).attrs({
     color: 'activity',
 })`
-    margin-right: ${spacing[1]};
+    margin-right: ${SPACING_PX[1]};
 `
 
 const Text = styled.span``

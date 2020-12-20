@@ -78,7 +78,7 @@ export const theme: AppTheme = {
             content: WHITE,
         },
         border: {
-            primary: '#E0E7FF',
+            primary: '#a4b7ff',
         },
         text: {
             primary: '#2E384D',

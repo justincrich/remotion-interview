@@ -6,7 +6,7 @@ import { color as colorSelect } from '../../styles/color'
 import { ThemeSelector } from '../../styles/index'
 
 type ColorType = 'primary' | 'inverted' | 'muted' | 'activity'
-type IconName = keyof typeof Icons
+export type IconName = keyof typeof Icons
 
 export interface IconsProps {
     className?: string
@@ -32,11 +32,7 @@ export const Icon = React.forwardRef(
                 size={size || sizing[2]}
                 coloring={coloring}
                 className={className}
-                onClick={() => {
-                    if (onClick) {
-                        onClick()
-                    }
-                }}
+                onClick={onClick}
             >
                 <Component />
             </Container>
@@ -47,6 +43,7 @@ export const Icon = React.forwardRef(
 const Container = styled.div<{
     coloring: ColorType | ThemeSelector
     size: string
+    onClick?: () => void
 }>`
     width: ${(p) => p.size};
     height: ${(p) => p.size};
@@ -62,4 +59,9 @@ const Container = styled.div<{
         width: 100%;
         height: 100%;
     }
+    ${(p) =>
+        p.onClick &&
+        `
+            cursor: pointer;
+        `}
 `

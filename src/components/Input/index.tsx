@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { Label } from '../Label'
 import { mixins } from '../../styles/mixins'
 import { color } from '../../styles/color'
 import { isKeyPressEnter } from '../../util/isKeyPressEnter'
+import { Icon, IconName } from '../Icon/index'
+import { Spacer } from '../Spacer'
 
 interface InputProps {
     error?: string
@@ -20,6 +22,10 @@ interface InputProps {
     onEnterPress?: () => void
     isTextArea?: boolean
     kind?: 'textinput' | 'textarea'
+    action?: {
+        icon: IconName
+        onAction: () => void
+    }
 }
 
 export const Input = React.forwardRef(
@@ -41,7 +47,10 @@ export const Input = React.forwardRef(
             type,
             kind = 'textinput',
             onBlur,
+            action,
         } = props
+
+        const [isFocused, setFocused] = useState(false)
 
         const handleKeyUp = (
             e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -59,7 +68,13 @@ export const Input = React.forwardRef(
             placeholder,
             onKeyUp: handleKeyUp,
             type,
-            onBlur,
+            onFocus: () => {
+                setFocused(true)
+            },
+            onBlur: () => {
+                setFocused(false)
+                onBlur?.()
+            },
             onChange: (e) => {
                 if (!onChange) return null
                 onChange(e.target.value)
@@ -70,22 +85,38 @@ export const Input = React.forwardRef(
         const taRef = ref as React.Ref<HTMLTextAreaElement>
         const inputRef = ref as React.Ref<HTMLInputElement>
         return (
-            <Container className={className} disabled={Boolean(disabled)}>
+            <Container className={className}>
                 {label && (
                     <StyledLabel hasError={Boolean(error)}>{label}</StyledLabel>
                 )}
-                {kind === 'textarea' ? (
-                    <TextAreaField {...inputProps} ref={taRef} />
-                ) : (
-                    <TextInputField {...inputProps} ref={inputRef} />
-                )}
+                <FieldContainer
+                    focused={isFocused}
+                    hasError={Boolean(error)}
+                    disabled={Boolean(disabled)}
+                >
+                    {kind === 'textarea' ? (
+                        <TextAreaField {...inputProps} ref={taRef} />
+                    ) : (
+                        <TextInputField {...inputProps} ref={inputRef} />
+                    )}
+                    {action && (
+                        <>
+                            <Icon
+                                iconName={action.icon}
+                                onClick={action.onAction}
+                                color="activity"
+                            />
+                            <Spacer size={1} vertical />
+                        </>
+                    )}
+                </FieldContainer>
                 {error && <ErrorMessage>{error}</ErrorMessage>}
             </Container>
         )
     }
 )
 
-const Container = styled.div<{ disabled: boolean }>`
+const Container = styled.div`
     display: flex;
     flex-flow: column nowrap;
 `
@@ -94,28 +125,39 @@ const StyledLabel = styled(Label)`
     margin-bottom: ${mixins.spacing[1]};
 `
 
+const FieldContainer = styled.div<{
+    disabled?: boolean
+    focused?: boolean
+    hasError?: boolean
+}>`
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 100%;
+    background-color: ${color.background.content};
+    border: ${(p) => (p.disabled ? 0 : 1)}px solid
+        ${(p) => (p.hasError ? color.status.error : color.border.primary)};
+    border-radius: 10px;
+    ${(p) =>
+        !p.disabled &&
+        p.focused &&
+        css`
+            border-color: ${color.brand.primary};
+        `}
+`
+
 type Input = { hasError?: boolean; disabled?: boolean }
 
 const INPUT_STYLE = css<Input>`
     ${mixins.text('paragraph', 'primary')}
     width: 100%;
-    border: 1px solid transparent;
     outline: none;
     padding: ${mixins.spacing[2]};
     &::placeholder {
         opacity: 0.7;
     }
-    background-color: ${color.background.app};
-    border: ${(p) => (p.disabled ? 0 : 1)}px solid
-        ${(p) => (p.hasError ? color.status.error : color.border.primary)};
-    border-radius: 5px;
-    ${(p) =>
-        !p.disabled &&
-        css`
-            &:hover {
-                border: 1px solid ${color.border.primary};
-            }
-        `}
+    border-radius: 10px;
+    border-color: transparent;
 `
 
 export const TextInputField = styled.input<Input>`
