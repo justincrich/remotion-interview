@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createGlobalStyle } from 'styled-components/macro'
+import { Provider } from 'react-redux'
+import { store } from './services/index'
 import * as serviceWorker from './serviceWorker'
 import { ThemeProvider } from './styles/ThemeProvider'
 import { theme } from './styles/theme'
@@ -21,12 +23,14 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <>
-                <GlobalStyle />
-                <ChatScreen />
-            </>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <>
+                    <GlobalStyle />
+                    <ChatScreen />
+                </>
+            </ThemeProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 )

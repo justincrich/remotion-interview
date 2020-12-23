@@ -20,18 +20,19 @@ const Section = ({
 }: {
     data: EmojiItem[]
     title: string
-    onSelect: (emojiCode: string) => void
+    onSelect: (emojiCode: EmojiItem) => void
 }): JSX.Element => {
     return (
         <EmojiSection>
             <EmojiSectionLabel>{title}</EmojiSectionLabel>
             <Line />
             <EmojiSectionBody>
-                {data.map(({ name, emoji }) => {
+                {data.map((emojiItem) => {
+                    const { emoji, name } = emojiItem
                     return (
                         <EmojiContainer
                             key={emoji}
-                            onClick={() => onSelect(emoji)}
+                            onClick={() => onSelect(emojiItem)}
                         >
                             <Emoji character={emoji} label={name} />
                         </EmojiContainer>
@@ -48,7 +49,7 @@ export const EmojiPicker = ({
     onClose,
 }: {
     className?: string
-    onSelect: (emojiCode: string) => void
+    onSelect: (emoji: EmojiItem) => void
     onClose: () => void
 }): JSX.Element => {
     const { data, filter, query } = useEmojis()
@@ -62,9 +63,9 @@ export const EmojiPicker = ({
         listRef.current?.resetAfterIndex(0, true)
     }, [data])
 
-    const handleSelect = (emojiCode: string): void => {
+    const handleSelect = (emojiItem: EmojiItem): void => {
         filter('')
-        onSelect(emojiCode)
+        onSelect(emojiItem)
         onClose()
     }
 

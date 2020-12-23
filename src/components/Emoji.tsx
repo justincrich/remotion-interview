@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import ReactDOM from 'react-dom'
 
 export const Emoji = ({
     className,

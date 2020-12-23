@@ -13,7 +13,7 @@ export const Spacer = (props: Props): JSX.Element => {
         <Container
             isVertical={Boolean(vertical)}
             size={size}
-            fill={sizeIdx === 'fill'}
+            fillContainer={sizeIdx === 'fill'}
         />
     )
 }
@@ -21,12 +21,12 @@ export const Spacer = (props: Props): JSX.Element => {
 const Container = styled.div<{
     isVertical: boolean
     size: string
-    fill: boolean
+    fillContainer: boolean
 }>`
     width: ${(p) => (p.isVertical ? p.size : 0)};
     height: ${(p) => (p.isVertical ? 0 : p.size)};
     ${(p) =>
-        p.fill
+        p.fillContainer
             ? `
       width: 0px;
       height: 0px;
