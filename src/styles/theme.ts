@@ -54,11 +54,11 @@ export type ThemedProps = { theme: AppTheme }
 const BLUE = '#2E5BFF'
 const BLUE_MUTED = '#D5DEFF'
 const WHITE = '#FFFFFF'
-const MUTED_GRAY = '#F4F6FC'
+const MUTED_GRAY = '#F0F3F6'
 const LABEL_GRAY = '#B0BAC9'
 const YELLOWISH = '#ffd22e'
 const GRAY = '#6c757d'
-
+const GRAY_MUTED = '#DCDCD6'
 export const theme: AppTheme = {
     colors: {
         brand: {
@@ -78,7 +78,7 @@ export const theme: AppTheme = {
             content: WHITE,
         },
         border: {
-            primary: '#a4b7ff',
+            primary: GRAY_MUTED,
         },
         text: {
             primary: '#2E384D',

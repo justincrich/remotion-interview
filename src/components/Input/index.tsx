@@ -6,6 +6,7 @@ import { color } from '../../styles/color'
 import { isKeyPressEnter } from '../../util/isKeyPressEnter'
 import { Icon, IconName } from '../Icon/index'
 import { Spacer } from '../Spacer'
+import { SPACING_PX } from '../../styles/mixins/constants'
 
 interface InputProps {
     error?: string
@@ -87,7 +88,12 @@ export const Input = React.forwardRef(
         return (
             <Container className={className}>
                 {label && (
-                    <StyledLabel hasError={Boolean(error)}>{label}</StyledLabel>
+                    <>
+                        <StyledLabel hasError={Boolean(error)}>
+                            {label}
+                        </StyledLabel>
+                        <Spacer size={1} />
+                    </>
                 )}
                 <FieldContainer
                     focused={isFocused}
@@ -119,11 +125,10 @@ export const Input = React.forwardRef(
 const Container = styled.div`
     display: flex;
     flex-flow: column nowrap;
+    flex: 1 1 auto;
 `
 
-const StyledLabel = styled(Label)`
-    margin-bottom: ${mixins.spacing[1]};
-`
+const StyledLabel = styled(Label)``
 
 const FieldContainer = styled.div<{
     disabled?: boolean
@@ -134,6 +139,7 @@ const FieldContainer = styled.div<{
     flex-flow: row nowrap;
     align-items: center;
     width: 100%;
+    padding: ${SPACING_PX[0]} ${SPACING_PX[1]};
     background-color: ${color.background.content};
     border: ${(p) => (p.disabled ? 0 : 1)}px solid
         ${(p) => (p.hasError ? color.status.error : color.border.primary)};
@@ -152,7 +158,6 @@ const INPUT_STYLE = css<Input>`
     ${mixins.text('paragraph', 'primary')}
     width: 100%;
     outline: none;
-    padding: ${mixins.spacing[2]};
     &::placeholder {
         opacity: 0.7;
     }
@@ -162,7 +167,6 @@ const INPUT_STYLE = css<Input>`
 
 export const TextInputField = styled.input<Input>`
     ${INPUT_STYLE}
-    height: 38px;
 `
 
 export const TextAreaField = styled.textarea<Input>`
@@ -171,7 +175,7 @@ export const TextAreaField = styled.textarea<Input>`
 `
 
 export const ErrorMessage = styled.div`
-    margin-top: ${mixins.spacing[1]};
+    margin-top: ${mixins.spacing[0]};
     ${mixins.text('sub')}
     color: ${color.status.error};
 `
